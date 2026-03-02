@@ -2,6 +2,7 @@ let prayerTimes = {};
 let nextPrayer = null;
 let iqamaTime = null;
 
+/* عداد إقامة لكل صلاة */
 const iqamaOffsets = {
   Fajr: 20,
   Dhuhr: 10,
@@ -10,11 +11,31 @@ const iqamaOffsets = {
   Isha: 10
 };
 
-/* ---------------- CLOCK ---------------- */
+/* الأذكار والأدعية */
+const azkar = [
+  "سبحان الله وبحمده",
+  "اللهم صل على محمد",
+  "أستغفر الله العظيم",
+  "لا إله إلا الله وحده لا شريك له"
+];
+let azkarIndex = 0;
+function showAzkar() {
+  document.getElementById("azkarBox").innerText = azkar[azkarIndex];
+  azkarIndex = (azkarIndex + 1) % azkar.length;
+}
+setInterval(showAzkar, 30000);
+showAzkar();
+
+/* ---------------- CLOCK 12 HOUR ---------------- */
 function updateClock() {
   const now = new Date();
+  let hours = now.getHours();
+  const minutes = now.getMinutes();
+  const ampm = hours >= 12 ? "م" : "ص";
+  hours = hours % 12;
+  hours = hours ? hours : 12;
   document.getElementById("clock").innerText =
-    now.toLocaleTimeString("ar-SA");
+    hours + ":" + (minutes < 10 ? "0"+minutes : minutes) + " " + ampm;
 }
 setInterval(updateClock, 1000);
 updateClock();
@@ -24,10 +45,7 @@ function initLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       pos => fetchPrayerTimes(pos.coords.latitude, pos.coords.longitude),
-      () => {
-        // fallback: الرياض
-        fetchPrayerTimes(24.7136, 46.6753);
-      }
+      () => fetchPrayerTimes(24.7136, 46.6753) // fallback الرياض
     );
   } else {
     fetchPrayerTimes(24.7136, 46.6753);
@@ -39,21 +57,21 @@ async function fetchPrayerTimes(lat, lon) {
   const today = new Date();
   const date = `${today.getDate()}-${today.getMonth()+1}-${today.getFullYear()}`;
 
-  const res = await fetch(
-    `https://api.aladhan.com/v1/timings/${date}?latitude=${lat}&longitude=${lon}&method=4`
-  );
+  try {
+    const res = await fetch(
+      `https://api.aladhan.com/v1/timings/${date}?latitude=${lat}&longitude=${lon}&method=4`
+    );
+    const data = await res.json();
+    prayerTimes = data.data.timings;
 
-  const data = await res.json();
-  prayerTimes = data.data.timings;
+    document.getElementById("hijriDate").innerText =
+      `${data.data.date.hijri.weekday.ar} - ${data.data.date.hijri.day} ${data.data.date.hijri.month.ar} ${data.data.date.hijri.year} هـ`;
 
-  document.getElementById("hijriDate").innerText =
-    `${data.data.date.hijri.weekday.ar} - 
-     ${data.data.date.hijri.day} 
-     ${data.data.date.hijri.month.ar} 
-     ${data.data.date.hijri.year} هـ`;
-
-  renderPrayers();
-  calculateNextPrayer();
+    renderPrayers();
+    calculateNextPrayer();
+  } catch(e) {
+    console.error("خطأ في جلب مواقيت الصلاة:", e);
+  }
 }
 
 /* ---------------- RENDER ---------------- */
@@ -62,15 +80,11 @@ function renderPrayers() {
   grid.innerHTML = "";
 
   const prayers = ["Fajr","Dhuhr","Asr","Maghrib","Isha"];
-
   prayers.forEach(p => {
     const card = document.createElement("div");
     card.className = "prayer-card";
     card.id = p;
-    card.innerHTML = `
-      ${translate(p)}
-      <span>${formatTime(prayerTimes[p])}</span>
-    `;
+    card.innerHTML = `${translate(p)}<span>${formatTime12(prayerTimes[p])}</span>`;
     grid.appendChild(card);
   });
 }
@@ -91,7 +105,6 @@ function calculateNextPrayer() {
     }
   }
 
-  // بعد العشاء -> فجر الغد
   const fajrTomorrow = createDateFromTime(prayerTimes["Fajr"]);
   fajrTomorrow.setDate(fajrTomorrow.getDate() + 1);
   nextPrayer = "Fajr";
@@ -115,7 +128,7 @@ function startCountdown() {
 
     if (diff <= 0) {
       document.getElementById("iqamaTimer").innerText = "أقيمت الصلاة";
-      calculateNextPrayer(); // إعادة الحساب للصلاة التالية
+      calculateNextPrayer();
       return;
     }
 
@@ -124,7 +137,6 @@ function startCountdown() {
 
     document.getElementById("iqamaTimer").innerText =
       minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
-
   }, 1000);
 }
 
@@ -139,16 +151,17 @@ function translate(p) {
   }[p];
 }
 
-function formatTime(t) {
-  return t.substring(0,5);
+function formatTime12(t) {
+  let [h,m] = t.split(":").map(Number);
+  const ampm = h >= 12 ? "م" : "ص";
+  h = h % 12;
+  h = h ? h : 12;
+  return h + ":" + (m<10?"0"+m:m) + " " + ampm;
 }
 
 function highlightPrayer() {
-  document.querySelectorAll(".prayer-card")
-    .forEach(el => el.classList.remove("active"));
-
-  if (nextPrayer)
-    document.getElementById(nextPrayer).classList.add("active");
+  document.querySelectorAll(".prayer-card").forEach(el => el.classList.remove("active"));
+  if (nextPrayer) document.getElementById(nextPrayer).classList.add("active");
 }
 
 /* ---------------- INIT ---------------- */
