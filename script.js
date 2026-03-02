@@ -11,18 +11,15 @@ const iqamaOffsets = {
 };
 
 /* ---------------- CLOCK ---------------- */
-
 function updateClock() {
   const now = new Date();
   document.getElementById("clock").innerText =
     now.toLocaleTimeString("ar-SA");
 }
-
 setInterval(updateClock, 1000);
 updateClock();
 
 /* ---------------- LOCATION ---------------- */
-
 function initLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -38,7 +35,6 @@ function initLocation() {
 }
 
 /* ---------------- FETCH PRAYERS ---------------- */
-
 async function fetchPrayerTimes(lat, lon) {
   const today = new Date();
   const date = `${today.getDate()}-${today.getMonth()+1}-${today.getFullYear()}`;
@@ -61,7 +57,6 @@ async function fetchPrayerTimes(lat, lon) {
 }
 
 /* ---------------- RENDER ---------------- */
-
 function renderPrayers() {
   const grid = document.getElementById("prayerGrid");
   grid.innerHTML = "";
@@ -81,7 +76,6 @@ function renderPrayers() {
 }
 
 /* ---------------- NEXT PRAYER ---------------- */
-
 function calculateNextPrayer() {
   const now = new Date();
   const prayers = ["Fajr","Dhuhr","Asr","Maghrib","Isha"];
@@ -114,7 +108,6 @@ function createDateFromTime(timeStr) {
 }
 
 /* ---------------- COUNTDOWN ---------------- */
-
 function startCountdown() {
   setInterval(() => {
     const now = new Date();
@@ -136,7 +129,6 @@ function startCountdown() {
 }
 
 /* ---------------- HELPERS ---------------- */
-
 function translate(p) {
   return {
     Fajr: "الفجر",
@@ -160,5 +152,4 @@ function highlightPrayer() {
 }
 
 /* ---------------- INIT ---------------- */
-
 initLocation();
