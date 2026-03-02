@@ -1,109 +1,89 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Cairo', sans-serif;
-}
-
-body {
-    background: #000;
-    color: white;
-    overflow: hidden;
-}
-
-.container {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-}
-
-/* الخلفية */
-.background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: url("assets/mosque.jpg") center/cover no-repeat;
-    filter: brightness(0.4);
-    z-index: -1;
+body{
+    margin:0;
+    background:black;
+    color:white;
+    font-family:'Cairo',sans-serif;
+    overflow:hidden;
 }
 
 /* العنوان */
-.header {
-    text-align: center;
-    padding: 20px;
-    font-size: 28px;
-    color: gold;
+.title{
+    text-align:center;
+    color:#ffd700;
+    font-size:42px;
+    margin-top:20px;
+    font-weight:bold;
 }
 
 /* الذكر */
-.zekr {
-    position: absolute;
-    left: 40px;
-    top: 120px;
-    font-size: 40px;
-    background: rgba(0,0,0,0.6);
-    padding: 20px 40px;
-    border-radius: 15px;
+.zekr{
+    position:absolute;
+    left:60px;
+    top:120px;
+    font-size:38px;
 }
 
 /* الساعة */
-.clock-box {
-    position: absolute;
-    right: 40px;
-    top: 120px;
-    text-align: center;
+.clockBox{
+    position:absolute;
+    right:60px;
+    top:120px;
+    text-align:right;
 }
 
-#clock {
-    font-size: 60px;
-    color: gold;
+#clock{
+    color:#ffd700;
+    font-size:64px;
 }
 
-#date {
-    margin-top: 10px;
-    font-size: 22px;
+#date{
+    margin-top:10px;
+    font-size:22px;
+}
+
+#hijriDate{
+    margin-top:5px;
+    font-size:20px;
+    color:#ffd700;
 }
 
 /* الصلوات */
-.prayers {
-    position: absolute;
-    bottom: 120px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+.prayers{
+    position:absolute;
+    bottom:120px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    gap:60px;
 }
 
-.prayer {
-    background: rgba(0,0,0,0.75);
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    width: 130px;
-    transition: 0.3s;
+.prayer{
+    text-align:center;
+    font-size:22px;
 }
 
-.prayer h3 {
-    margin-bottom: 10px;
+.prayer span{
+    display:block;
+    margin-top:10px;
+    font-size:24px;
 }
 
-.prayer span {
-    font-size: 22px;
-}
-
-.prayer.active {
-    border: 3px solid gold;
-    box-shadow: 0 0 20px gold;
+/* الصلاة الحالية */
+.active{
+    border:3px solid #ffd700;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 0 20px #ffd700;
 }
 
 /* الإقامة */
-.iqama {
-    position: absolute;
-    bottom: 40px;
-    right: 40px;
-    background: gold;
-    color: black;
-    padding: 15px 25px;
-    border-radius: 12px;
-    font-size: 26px;
+.iqama{
+    position:absolute;
+    bottom:40px;
+    right:60px;
+    background:#ffd700;
+    color:black;
+    padding:15px 25px;
+    border-radius:10px;
+    font-size:24px;
 }
