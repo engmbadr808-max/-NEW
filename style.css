@@ -1,89 +1,99 @@
 body{
-    margin:0;
-    background:black;
-    color:white;
-    font-family:'Cairo',sans-serif;
-    overflow:hidden;
+margin:0;
+font-family:'Cairo',sans-serif;
+color:white;
+overflow:hidden;
+background:black;
 }
 
-/* العنوان */
-.title{
-    text-align:center;
-    color:#ffd700;
-    font-size:42px;
-    margin-top:20px;
-    font-weight:bold;
+/* الخلفية */
+.bg{
+position:fixed;
+width:100%;
+height:100%;
+background:url("assets/bg.jpg") center/cover no-repeat;
+filter:brightness(.35);
+z-index:-1;
+}
+
+/* اسم المسجد */
+.mosque-name{
+text-align:center;
+font-size:48px;
+color:#FFD700;
+margin-top:20px;
 }
 
 /* الذكر */
-.zekr{
-    position:absolute;
-    left:60px;
-    top:120px;
-    font-size:38px;
+.zekr-box{
+position:absolute;
+left:60px;
+top:150px;
+background:rgba(0,0,0,.6);
+padding:30px;
+font-size:42px;
+border-radius:15px;
 }
 
-/* الساعة */
-.clockBox{
-    position:absolute;
-    right:60px;
-    top:120px;
-    text-align:right;
+/* لوحة الوقت */
+.time-panel{
+position:absolute;
+right:60px;
+top:120px;
+text-align:right;
 }
 
-#clock{
-    color:#ffd700;
-    font-size:64px;
+.digital-time{
+font-size:70px;
+color:#FFD700;
 }
 
-#date{
-    margin-top:10px;
-    font-size:22px;
+.date-box{
+margin-top:10px;
+background:rgba(0,0,0,.7);
+padding:12px 20px;
+border-radius:10px;
+font-size:22px;
 }
 
-#hijriDate{
-    margin-top:5px;
-    font-size:20px;
-    color:#ffd700;
-}
-
-/* الصلوات */
-.prayers{
-    position:absolute;
-    bottom:120px;
-    width:100%;
-    display:flex;
-    justify-content:center;
-    gap:60px;
+/* شريط الصلوات */
+.prayer-bar{
+position:absolute;
+bottom:120px;
+width:100%;
+display:flex;
+justify-content:center;
+gap:25px;
 }
 
 .prayer{
-    text-align:center;
-    font-size:22px;
+background:rgba(0,0,0,.8);
+padding:20px 30px;
+border-radius:15px;
+text-align:center;
+font-size:24px;
 }
 
 .prayer span{
-    display:block;
-    margin-top:10px;
-    font-size:24px;
+display:block;
+margin-top:10px;
+font-size:26px;
 }
 
 /* الصلاة الحالية */
 .active{
-    border:3px solid #ffd700;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 0 20px #ffd700;
+border:3px solid #FFD700;
+box-shadow:0 0 25px #FFD700;
 }
 
 /* الإقامة */
 .iqama{
-    position:absolute;
-    bottom:40px;
-    right:60px;
-    background:#ffd700;
-    color:black;
-    padding:15px 25px;
-    border-radius:10px;
-    font-size:24px;
+position:absolute;
+right:60px;
+bottom:40px;
+background:#FFD700;
+color:black;
+padding:15px 30px;
+border-radius:12px;
+font-size:28px;
 }
