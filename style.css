@@ -1,6 +1,4 @@
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -63,4 +61,14 @@ body {
   background: rgba(255,215,0,0.15);
   padding: 30px;
   border-radius: 20px;
+}
+
+.azkar-box {
+  text-align: center;
+  font-size: 50px;
+  background: rgba(0,0,0,0.5);
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+  color: gold;
 }
