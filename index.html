@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>شاشة المسجد</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- الخلفية -->
+    <div class="background"></div>
+
+    <!-- العنوان -->
+    <div class="header">
+        <h1>مسجد الأمير فواز</h1>
+    </div>
+
+    <!-- الذكر -->
+    <div class="zekr">
+        أستغفر الله العظيم
+    </div>
+
+    <!-- الساعة -->
+    <div class="clock-box">
+        <div id="clock">00:00</div>
+        <div id="date"></div>
+    </div>
+
+    <!-- الصلوات -->
+    <div class="prayers">
+
+        <div class="prayer">
+            <h3>الفجر</h3>
+            <span id="fajr">05:10</span>
+        </div>
+
+        <div class="prayer">
+            <h3>الشروق</h3>
+            <span id="sunrise">06:35</span>
+        </div>
+
+        <div class="prayer active">
+            <h3>الظهر</h3>
+            <span id="dhuhr">12:05</span>
+        </div>
+
+        <div class="prayer">
+            <h3>العصر</h3>
+            <span id="asr">15:15</span>
+        </div>
+
+        <div class="prayer">
+            <h3>المغرب</h3>
+            <span id="maghrib">17:48</span>
+        </div>
+
+        <div class="prayer">
+            <h3>العشاء</h3>
+            <span id="isha">19:08</span>
+        </div>
+
+    </div>
+
+    <!-- الإقامة -->
+    <div class="iqama">
+        الإقامة بعد: <span id="iqamaTimer">10:00</span>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
